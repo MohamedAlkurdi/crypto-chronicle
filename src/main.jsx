@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
+      <Route path='/*'/>
       <Route path='/login'/>
       <Route path='/signup'/>
       <Route path='/home'/>
