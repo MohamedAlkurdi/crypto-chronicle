@@ -9,7 +9,7 @@ function App() {
   })
   return (
     <div className="App w-full h-40">
-      <nav className='w-full h-12 bg-black'></nav>
+      <nav className='w-full h-12 bg-black '></nav>
       <div className="body w-full h-12 bg-black"></div>
       <footer className='w-full h-12 bg-black'></footer>
     </div>
