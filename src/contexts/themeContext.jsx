@@ -1,9 +1,3 @@
-// import { createContext, useState } from "react";
+import { createContext } from "react";
 
-// export const themeContetx = createContext({
-//     theme:"dark",
-// });
-
-// export const themeProvider = ({children})=>{
-//     const [theme,useTheme] = useState();
-// }
+export const themeContetx = createContext();

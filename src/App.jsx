@@ -1,24 +1,18 @@
 import { useEffect } from 'react'
-import './App.css'
-// import { useGetCoinsListQuery } from './redux/API/apiSlice'
-import { useGlobalQuery } from './redux/API/apiSlice'
-// import { useGetCoinHistoryQuery } from './redux/API/apiSlice'
-
+// import { useGlobalQuery } from './redux/API/apiSlice'
 
 function App() {
-
-  // const getAllCoinHook = useGetCoinsListQuery()
-  const global = useGlobalQuery()
-  // const coinHistory = useGetCoinHistoryQuery();
-
+  // const global = useGlobalQuery()
 
   useEffect(()=>{
-    console.log("hook test:",global.data.coins);
+    // console.log("hook test:",global.data.coins);
   })
   return (
-    <>
-    <h1>test</h1>
-    </>
+    <div className="App w-full h-40">
+      <nav className='w-full h-12 bg-black'></nav>
+      <div className="body w-full h-12 bg-black"></div>
+      <footer className='w-full h-12 bg-black'></footer>
+    </div>
   )
 }
 
