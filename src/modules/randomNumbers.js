@@ -8,7 +8,7 @@ export function getRandomNumberInRange(min, max) {
 export function randomSetOfNumbers(max) {
     const set = new Set();
     while (set.size < 5) {
-        set.add(getRandomNumberInRange(0, max - 1)); // Ensure the max index is included
+        set.add(getRandomNumberInRange(0, max - 1)); 
     }
     return set;
 }
