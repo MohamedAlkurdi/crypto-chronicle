@@ -12,8 +12,8 @@ export default {
         lightMain:"#496683",
         secondary:"#93FCEC",
         lightSecondary:"#D6FEF8",
+        darkSecondary:"#6fc8bb",
       },
-
     },
   },
   plugins: [],

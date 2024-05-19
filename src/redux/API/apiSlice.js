@@ -53,6 +53,12 @@ export const apiSlice = createApi({
                 url:`https://api.coingecko.com/api/v3/search?query=btc`,
                 method:'get',
             })
+        }),
+        CoinSummary:builder.query({
+            query:(id="bitcoin",vs_currency="usd",include_market_cap=true,include_24hr_vol=true,include_24hr_change=true,include_last_updated_at=true)=>({
+                url:`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${vs_currency}&include_market_cap=${include_market_cap}&include_24hr_vol=${include_24hr_vol}&include_24hr_change=${include_24hr_change}&include_last_updated_at=${include_last_updated_at}`,
+                method:'get',
+            })
         })
     })
 })
@@ -66,4 +72,5 @@ export const {
     useGetNftByIdQuery,
     useSearchQuery,
     useGlobalQuery,
+    useCoinSummaryQuery,
 } = apiSlice
