@@ -30,7 +30,7 @@ const generalData = createSlice({
             const data = action.payload;
             const randomIndices = randomSetOfNumbers(data.length);
             const randCoins = [];
-            
+
             randomIndices.forEach((index) => {
                 randCoins.push(data[index].id);
             });
@@ -45,4 +45,5 @@ const generalData = createSlice({
     }
 });
 
+export const { setTimeSlice } = generalData.actions;
 export default generalData.reducer;

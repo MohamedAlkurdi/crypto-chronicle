@@ -15,9 +15,9 @@ export function randomSetOfNumbers(max) {
     return set;
 }
 
-export function prepareChartData(array){
+export function prepareChartData(array,division){
     let length = array.length;
-        const gap = Math.ceil(length/10)
+        const gap = Math.ceil(length/division)
         let indecies = []
         for(let i=0;i<length;i+=gap){
             indecies.push(i);

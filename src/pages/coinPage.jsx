@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { useLocation, useParams } from "react-router-dom"
 import { useGetCoinByIdQuery } from "../redux/API/apiSlice"
 import defaultImage from '../assets/_d7457e79-4a4f-49eb-831c-99a1ff31f82f.jpg'
-import AreaChartComponent from "../components/coinChart"
+import CoinChart from "../components/coinChart"
+import TimeSliceOptions from "../components/timeSliceOptions"
 
 export default function CoinPage(){
     const id = useParams().id.substring(1);
@@ -31,7 +32,8 @@ export default function CoinPage(){
     return(
         <>
         <div className="pb-16">coin page {id} </div>
-        <AreaChartComponent/>
+        <TimeSliceOptions/>
+        <CoinChart/>
         </>
     )
 }

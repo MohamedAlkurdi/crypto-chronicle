@@ -16,24 +16,24 @@ import { useSelector } from 'react-redux';
 import { prepareChartData } from '../modules/calculations';
 import { fakeChartsData } from '../staticData';
 
-const AreaChartComponent = () => {
-    const selector = useSelector(state => state.generalData.vs_currency);
-    const [requestParameters, setRequestParameters] = useState({vs_currency: selector,days: 30,});
-    const [chartData, setChartData] = useState(fakeChartsData)
+const CoinChart = () => {
+    const vs_currency = useSelector(state => state.generalData.vs_currency);
+    const chartTimeSlice = useSelector(state => state.chartSlice.chartTimeSlice)
+    const [requestParameters, setRequestParameters] = useState({ vs_currency: vs_currency, days: 30 });
+    const [chartData, setChartData] = useState(fakeChartsData);
+    const chartDivision = useSelector(state => state.chartSlice.chartDetails)
 
     useEffect(() => {
-        const updaterObject = requestParameters;
-        updaterObject.vs_currency = selector;
-        setRequestParameters(updaterObject)
-    }, [selector])
+        setRequestParameters(prev => ({ ...prev, vs_currency: vs_currency,days:chartTimeSlice }));
+    }, [vs_currency,chartTimeSlice]);
 
-    const fetchingChartData = useGetCoinChartQuery(requestParameters.vs_currency, requestParameters.days);
+    const { data, error, isLoading, isSuccess } = useGetCoinChartQuery(requestParameters);
 
     useEffect(() => {
-        if (fetchingChartData.isSuccess) {
-            setChartData(prepareChartData(fetchingChartData.data.prices));
+        if (isSuccess) {
+            setChartData(prepareChartData(data.prices,chartDivision));
         }
-    }, [fetchingChartData])
+    }, [isSuccess, data,chartDivision]);
 
     return (
         <ResponsiveContainer width="100%" height="100%">
@@ -41,7 +41,7 @@ const AreaChartComponent = () => {
                 width={300}
                 height={300}
                 data={chartData}
-                margin={{ right: 60,left:60 }}
+                margin={{ right: 60, left: 60 }}
             >
                 <YAxis />
                 <XAxis dataKey="date" />
@@ -51,8 +51,8 @@ const AreaChartComponent = () => {
                 <Area
                     type="monotone"
                     dataKey="price"
-                    stroke="#2563eb"
-                    fill="#3b82f6"
+                    stroke="#34495E"
+                    fill="#34495E"
                     stackId="1"
                 />
             </AreaChart>
@@ -74,4 +74,4 @@ const CustomTooltip = ({ active, payload, label }) => {
     }
 };
 
-export default AreaChartComponent;
+export default CoinChart;
