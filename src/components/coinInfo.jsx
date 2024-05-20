@@ -1,16 +1,32 @@
 import { useEffect, useState } from "react";
 import { useCoinSummaryQuery } from "../redux/API/apiSlice"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { addFavCoin } from "../redux/favSlice";
 
-export default function CoinInfo({id}){
-    const {vs_currency} = useSelector(state=>state.generalData);
+export default function CoinInfo({ id }) {
+    const { vs_currency } = useSelector(state => state.generalData);
+    const dispatch = useDispatch()
+    const selector = useSelector(state => state.favSlice.coins)
+    const [fav,setFav] = useState(false);
 
-    const [state,setState] = useState({
-        [vs_currency]:"loading...",
-        usd_market_cap:"loading...",
-        usd_24h_vol:"loading...",
-        usd_24h_change:"loading...",
-        last_updated_at:"loading...",
+    useEffect(()=>{
+        if(selector.includes(id)){
+            setFav(true);
+        }
+    },[selector])
+
+    function handleFav(e) {
+        e.preventDefault();
+        dispatch(addFavCoin(id));
+    }
+
+    const [state, setState] = useState({
+        [vs_currency]: "loading...",
+        usd_market_cap: "loading...",
+        usd_24h_vol: "loading...",
+        usd_24h_change: "loading...",
+        last_updated_at: "loading...",
     })
 
     // const coinSummary = useCoinSummaryQuery(id);
@@ -34,17 +50,17 @@ export default function CoinInfo({id}){
     //     }
     // },[coinSummary])
 
-    return(
-        <div className="coinInfo">
-            <hr className="h-[2px] w-full bg-black" />
+    return (
+        <NavLink to={`/coin/:${id}`} className="coinInfo  hover:bg-darkMainBg">
             <div className="row  flex justify-between items-center ">
-            <div className="w-full p-5 text-lg text-main ">{id}</div>
-            <div className="w-full p-5 text-lg text-main ">{state.usd}</div>
-            <div className="w-full p-5 text-lg text-main ">{state.usd_market_cap}</div>
-            <div className="w-full p-5 text-lg text-main ">{state.usd_24h_vol}</div>
-            <div className="w-full p-5 text-lg text-main ">{state.usd_24h_change}</div>
-            <div className="w-full p-5 text-lg text-main ">{state.last_updated_at}</div>
+                <div className="w-full text-center p-5 text-lg text-main ">{id}</div>
+                <div className="w-full text-center p-5 text-lg text-main ">{state.usd}</div>
+                <div className="w-full text-center p-5 text-lg text-main ">{state.usd_market_cap}</div>
+                <div className="w-full text-center p-5 text-lg text-main ">{state.usd_24h_vol}</div>
+                <div className="w-full text-center p-5 text-lg text-main ">{state.usd_24h_change}</div>
+                <div className="w-full text-center p-5 text-lg text-main ">{state.last_updated_at}</div>
+                <button className="w-full text-center p-5 text-lg text-main" onClick={(handleFav)}><i className={`fa-${fav?'solid':'regular'} fa-heart`}></i></button>
             </div>
-        </div>
+        </NavLink>
     )
 }

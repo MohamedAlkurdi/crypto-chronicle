@@ -12,7 +12,7 @@ export const apiSlice = createApi({
                 method: 'get'
             })
         }),
-        getUserById: builder.query({
+        getCoinById: builder.query({
             query: (id) => ({
                 url: `/coins/${id}`,
                 method: 'get',
@@ -25,8 +25,8 @@ export const apiSlice = createApi({
             })
         }),
         getCoinChart: builder.query({
-            query:(vs_currency="usd",days=1)=>({
-                url:`https:api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${vs_currency}&days=${days}`,
+            query:(vs_currency="usd",days=30)=>({
+                url:`/coins/bitcoin/market_chart?vs_currency=${vs_currency}&days=${days}`,
                 method:'get',
             })
         }),
@@ -65,7 +65,7 @@ export const apiSlice = createApi({
 
 export const {
     useGetCoinsListQuery,
-    useGetUserByIdQuery,
+    useGetCoinByIdQuery,
     useGetCoinHistoryQuery,
     useGetCoinChartQuery,
     useGetNftListQuery,
