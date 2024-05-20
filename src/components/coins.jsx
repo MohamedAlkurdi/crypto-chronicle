@@ -3,12 +3,12 @@ import CoinInfo from "./coinInfo"
 import { useDispatch, useSelector } from "react-redux";
 import { loadMoreCoins } from "../redux/generalData";
 import { NavLink } from "react-router-dom";
+import { staticCoins } from "../staticData";
 
 export default function Coins() {
     const [loading, setLoading] = useState(false)
     const [AllowedToLoad, setAllowedToLoad] = useState(false)
     const neededCoins = Array.from(useSelector(state => state.generalData.neededCoins));
-    const staticCoins = ["tahseen", "abawad", "jum3a", "ilcoin", "illuvium"];
     const dispatch = useDispatch();
 
     function handleLoading() {
@@ -30,8 +30,6 @@ export default function Coins() {
         }
     }, [location])
 
-
-    //5 calls
     function renderCoins(array) {
         try {
             return array.map(el => {

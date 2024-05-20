@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { enableMapSet } from 'immer';
-import { randomSetOfNumbers } from "../modules/randomNumbers";
+import { randomSetOfNumbers } from "../modules/calculations";
 
 enableMapSet();
 

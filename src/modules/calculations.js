@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function getRandomNumberInRange(min, max) {
     if (typeof min !== 'number' || typeof max !== 'number' || min > max) {
         throw new Error('Invalid input: min and max should be numbers and min should be less than or equal to max');
@@ -11,4 +13,17 @@ export function randomSetOfNumbers(max) {
         set.add(getRandomNumberInRange(0, max - 1)); 
     }
     return set;
+}
+
+export function prepareChartData(array){
+    let length = array.length;
+        const gap = Math.ceil(length/10)
+        let indecies = []
+        for(let i=0;i<length;i+=gap){
+            indecies.push(i);
+        }
+        indecies.push(length-1)
+        return indecies.map((el)=>{
+            return {date:moment(moment(array[el][0]).format('YYYY-MM-DD HH:mm:ss')).format('MM-DD'),price:array[el][1]};
+        })
 }
