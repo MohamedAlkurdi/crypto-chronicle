@@ -16,15 +16,15 @@ import { useSelector } from 'react-redux';
 import { prepareChartData } from '../modules/calculations';
 import { fakeChartsData } from '../staticData';
 
-const CoinChart = () => {
+const CoinChart = ({coinIdProp}) => {
     const vs_currency = useSelector(state => state.generalData.vs_currency);
     const chartTimeSlice = useSelector(state => state.chartSlice.chartTimeSlice)
-    const [requestParameters, setRequestParameters] = useState({ vs_currency: vs_currency, days: 30 });
+    const [requestParameters, setRequestParameters] = useState({coinId:'bitcoin', vs_currency: vs_currency, days: 30 });
     const [chartData, setChartData] = useState(fakeChartsData);
     const chartDivision = useSelector(state => state.chartSlice.chartDetails)
 
     useEffect(() => {
-        setRequestParameters(prev => ({ ...prev, vs_currency: vs_currency,days:chartTimeSlice }));
+        setRequestParameters(prev => ({ ...prev,coinId:coinIdProp, vs_currency: vs_currency,days:chartTimeSlice }));
     }, [vs_currency,chartTimeSlice]);
 
     const { data, error, isLoading, isSuccess } = useGetCoinChartQuery(requestParameters);

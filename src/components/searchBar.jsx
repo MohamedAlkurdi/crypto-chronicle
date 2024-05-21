@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 export default function SearchBar(){
     const [theme,setTheme] = useState('moon')
     return(
-        <div className="searchBar flex items-center justify-between py-4 px-6 ">
+        <div className="searchBar flex items-center justify-between py-4 px-6 custom_box_shadow ">
             <div className="searchInputContainer flex-1">
             <input type="text" placeholder="Search...." className="seachInput w-[80%] h-[44px] text-xl p-2 rounded-lg bg-main placeholder:text-secondary text-secondary focus:outline-none" />
             </div>

@@ -25,8 +25,8 @@ export const apiSlice = createApi({
             })
         }),
         getCoinChart: builder.query({
-            query:({ vs_currency, days })=>({
-                url:`/coins/bitcoin/market_chart?vs_currency=${vs_currency}&days=${days}`,
+            query:({coinId, vs_currency, days })=>({
+                url:`/coins/${coinId}/market_chart?vs_currency=${vs_currency}&days=${days}`,
                 method:'get',
             })
         }),

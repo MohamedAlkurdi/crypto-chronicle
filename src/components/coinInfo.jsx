@@ -51,7 +51,7 @@ export default function CoinInfo({ id }) {
     // },[coinSummary])
 
     return (
-        <NavLink to={`/coin/:${id}`} className="coinInfo  hover:bg-darkMainBg">
+        <NavLink to={`/coin/:${id}`} className="coinInfo  hover:bg-darkMainBg border-t-2 border-t-main">
             <div className="row  flex justify-between items-center ">
                 <div className="w-full text-center p-5 text-lg text-main ">{id}</div>
                 <div className="w-full text-center p-5 text-lg text-main ">{state.usd}</div>

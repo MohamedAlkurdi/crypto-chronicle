@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTimeSlice } from "../redux/generalData";
+import { setTimeSlice } from "../redux/chartSlice";
 import { setDetails } from "../redux/chartSlice";
+import {setChartError} from "../redux/chartSlice"
 
 export default function TimeSliceOptions() {
-    const chartTimeSlice = useSelector(state=>state.chartSlice.chartTimeSlice)
+    const chartTimeSlice = useSelector(state=>state.chartSlice.chartTimeSlice);
+    const chartError = useSelector(state=>state.chartSlice.chartError);
     const dispatch = useDispatch();
     const [customTime, setCustomTime] = useState("");
     const [detailed,setDetailed] = useState(false);
@@ -28,6 +30,9 @@ export default function TimeSliceOptions() {
         const time = parseInt(customTime);
         if (!isNaN(time) && time > 0 && time < 365) {
             dispatch(setTimeSlice(customTime));
+            dispatch(setChartError(false));
+        }else{
+            dispatch(setChartError(true));
         }
     };
 
@@ -40,7 +45,7 @@ export default function TimeSliceOptions() {
                     <button
                         key={time}
                         onClick={() => handleTimeSelection(time)}
-                        className={` p-2 bg-main text-secondary rounded-md hover:bg-lightMain`}
+                        className={` ${chartTimeSlice === time? 'bg-lightMain' : 'bg-main' } p-2 text-secondary rounded-md hover:bg-lightMain`}
                     >
                         {time} day{time !== '1' && 's'}
                     </button>
@@ -58,7 +63,7 @@ export default function TimeSliceOptions() {
                     value={customTime}
                     onChange={handleCustomTimeChange}
                     placeholder="Enter custom time"
-                    className="p-2 border border-main text-main rounded-md focus:outline-none"
+                    className={`p-2 border ${chartError? 'border-red-500' : 'border-main'}  text-main rounded-md focus:outline-none`}
                 />
                 <button
                     onClick={handleCustomTimeSubmit}
