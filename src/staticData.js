@@ -29,4 +29,4 @@ export const fakeChartsData = [
     },
 ]
 
-export const staticCoins = ["bicoin", "ethereum", "tether", "binancecoin", "solana"];
+export const staticCoins = ["bitcoin", "ethereum", "tether", "binancecoin", "solana"];

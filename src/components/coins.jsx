@@ -42,7 +42,7 @@ export default function Coins() {
     }
 
     return (
-        <div className="coinsInfoContainer flex flex-col">
+        <div className="coinsInfoContainer flex flex-col my-40">
             <div className="coinInfo flex justify-between items-center ">
                 <div className="w-full text-center font-bold p-5 text-xl capitalize text-main ">ID</div>
                 <div className="w-full text-center font-bold p-5 text-xl capitalize text-main ">Price</div>
