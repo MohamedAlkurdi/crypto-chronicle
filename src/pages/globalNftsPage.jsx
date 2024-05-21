@@ -1,1 +1,4 @@
-export default function GlocalNftsPage(){}
+
+export default function GlocalNftsPage(){
+
+}

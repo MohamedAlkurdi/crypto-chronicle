@@ -6,6 +6,7 @@ import img3 from "../assets/pexels-alesiakozik-6780789.jpg"
 import img4 from "../assets/pexels-davidmcbee-730564.jpg"
 import img5 from "../assets/pierre-borthiry-peiobty-vBCVcWUyvyM-unsplash.jpg"
 import img6 from "../assets/bannerImage.png"
+import Nfts from '../components/nfts'
 
 const slides = [
     { url: img6, title: "italy" },
@@ -21,6 +22,7 @@ export default function Home() {
         < >
             <ImageSlider images={slides} />
             <Coins />
+            <Nfts/>
         </>
     )
 }
