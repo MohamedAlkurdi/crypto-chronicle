@@ -10,7 +10,7 @@ import SingleNftDataDisplayer from "./singleNftDataDisplayer";
 
 export default function NftInfo({id}) {
     const dispatch = useDispatch()
-    const {data,isError} = useGetNftByIdQuery(id);
+    const {data,isError,isSuccess} = useGetNftByIdQuery(id);
 
     const [componentState,setComponentState] = useState({
         id,
@@ -29,8 +29,13 @@ export default function NftInfo({id}) {
     }
 
     useEffect(()=>{
-        if(data){
-            console.log("fetchingNFT.data",data);
+        if(isError){
+            handleCallsLimitError()
+        }
+    },[isSuccess,isError])
+
+    useEffect(()=>{
+        if(isSuccess){
             let {name,description,image,floor_price,links} = data
             description = shortenText(description)
             const updaterObject = {
@@ -41,14 +46,11 @@ export default function NftInfo({id}) {
                 price:floor_price.usd,
                 homepage:links.homepage,
             }
+            console.log('addLoadedNFT')
             dispatch(addLoadedNFT(updaterObject));
             setComponentState(updaterObject)
         }
-        console.log("nft data log:",data)
-        if(isError){
-            handleCallsLimitError()
-        }
-    },[data,isError])
+    },[isSuccess])
 
 
     return (

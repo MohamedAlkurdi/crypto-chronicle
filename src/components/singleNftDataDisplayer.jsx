@@ -22,9 +22,7 @@ export default function SingleNftDataDisplayer({ componentState }){
     function handleLinkClick(e){
         e.preventDefault()
     }
-    console.log(componentState)
     const {id,image,name,price,description,homepage} = componentState;
-    console.log("SingleNftDataDisplayer",id,image,name,price,description,homepage)
     return (
         <NavLink to={`/nft/:${id}`} className="coinInfo  hover:bg-darkMainBg h-auto border-t-2 border-t-main p-4 ">
             <div className="nftBox flex flex-col justify-between w-full items-center relative">

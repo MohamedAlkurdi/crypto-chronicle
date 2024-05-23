@@ -1,20 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    loadedNFTS:[
-        
-    ]
-}
+    loadedNFTS: []
+};
 
 const NFTSslice = createSlice({
-    name:"NFTSslice",
+    name: "NFTSslice",
     initialState,
-    reducers:{
-        addLoadedNFT:(state,action)=>{
-            state.loadedNFTS.push(action.payload);
+    reducers: {
+        addLoadedNFT: (state, action) => {
+            const set = new Set(state.loadedNFTS);
+            set.add(action.payload);
+            state.loadedNFTS = Array.from(set);
+            state.loadedNFTS.len
         }
     }
-})
+});
 
-export const {addLoadedNFT} = NFTSslice.actions;
+export const { addLoadedNFT } = NFTSslice.actions;
 export default NFTSslice.reducer;

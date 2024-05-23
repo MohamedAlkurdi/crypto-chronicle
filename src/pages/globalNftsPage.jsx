@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux"
-import NftInfo from "../components/nftInfo";
 import { NavLink } from "react-router-dom";
 import SingleNftDataDisplayer from "../components/singleNftDataDisplayer";
 
@@ -13,7 +12,7 @@ export default function GlocalNftsPage(){
 
     const renderTheNFTS = selector.map(el=>{
         if(el !== "Loading..."){
-        return <SingleNftDataDisplayer key={el} componentState={el}/>
+        return <SingleNftDataDisplayer key={el.id} componentState={el}/>
     }
     })
 return(
