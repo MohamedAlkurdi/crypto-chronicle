@@ -3,6 +3,7 @@ import { apiSlice } from "./API/apiSlice";
 import generalData from "./generalData";
 import favSlice from "./favSlice";
 import chartSlice from "./chartSlice";
+import NFTSslice from "./NFTSslice";
 
 const store = configureStore({
     reducer:{
@@ -10,6 +11,7 @@ const store = configureStore({
         generalData,
         favSlice,
         chartSlice,
+        NFTSslice
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware),

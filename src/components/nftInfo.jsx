@@ -1,17 +1,19 @@
 
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { addFavNft } from "../redux/favSlice";
 import { useGetNftByIdQuery } from "../redux/API/apiSlice";
-import defaultImage from '../assets/_52b6b019-af38-4bd4-b148-405628d2815b.jpg'
+import defaultImage from '../assets/pexels-davidmcbee-730564.jpg'
+import {addLoadedNFT} from '../redux/NFTSslice'
+import { handleCallsLimitError } from "../modules/errorHandlers";
+import SingleNftDataDisplayer from "./singleNftDataDisplayer";
 
 export default function NftInfo({id}) {
     const dispatch = useDispatch()
-    const selector = useSelector(state => state.favSlice.nfts)
-    const [fav,setFav] = useState(false);
-    const {data} = useGetNftByIdQuery(id);
+    const {data,isError} = useGetNftByIdQuery(id);
+
     const [componentState,setComponentState] = useState({
+        id,
         name:"Loading...",
         description:"Loading...",
         image:defaultImage,
@@ -19,45 +21,41 @@ export default function NftInfo({id}) {
         homepage:"Loading..."
     })
 
-    useEffect(()=>{
-        if(selector.includes(id)){
-            setFav(true);
+    function shortenText(text = 'Loading...'){
+        if(text.length > 170){
+            return text.slice(0,160) + '...(click for more details)'
         }
-    },[selector])
+        return text;
+    }
 
     useEffect(()=>{
         if(data){
             console.log("fetchingNFT.data",data);
-            const {name,description,image,floor_price,links} = data
+            let {name,description,image,floor_price,links} = data
+            description = shortenText(description)
             const updaterObject = {
+                id,
                 name,
                 description,
-                image,
+                image:image.small,
                 price:floor_price.usd,
                 homepage:links.homepage,
             }
+            dispatch(addLoadedNFT(updaterObject));
             setComponentState(updaterObject)
         }
-    },[data])
-
-    function handleFav(e) {
-        e.preventDefault();
-        dispatch(addFavNft(id));
-    }
+        console.log("nft data log:",data)
+        if(isError){
+            handleCallsLimitError()
+        }
+    },[data,isError])
 
 
     return (
-        <NavLink to={`/nft/:${id}`} className="coinInfo  hover:bg-darkMainBg h-auto border-t-2 border-t-main ">
-            <div className="nftBox flex justify-between w-full items-center relative">
-                <img className="w-1/2" src={componentState.image} alt="nft"/>
-                <div className="info flex flex-col w-1/2">
-                    <div className="name">{componentState.name}</div>
-                    <div className="description">{componentState.description}</div>
-                    <div className="price">{componentState.price}</div>
-                    <a href={componentState.homepage}>home page</a>
-                </div>
-                <button className="w-full text-center p-5 text-lg text-main absolute top-1 left-1" onClick={(handleFav)}><i className={`fa-${fav?'solid':'regular'} fa-heart`}></i></button>
-            </div>
+        <NavLink to={`/nft/:${id}`} className="coinInfo  hover:bg-darkMainBg h-auto border-t-2 border-t-main p-4 ">
+            <SingleNftDataDisplayer 
+                componentState={componentState} 
+            />
         </NavLink>
     )
 }

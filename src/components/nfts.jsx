@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import {NavLink} from 'react-router-dom'
 import { useGetNftListQuery } from "../redux/API/apiSlice";
 import NftInfo from "./nftInfo";
+import { handleCallsLimitError } from "../modules/errorHandlers";
 
 export default function Nfts() {
     const { data, isSuccess, isError, isLoading } = useGetNftListQuery();
@@ -8,16 +10,21 @@ export default function Nfts() {
         "Loading...",
     ])
 
+
     useEffect(() => {
         if (isSuccess) {
             const updaterObject = [];
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 4; i++) {
                 updaterObject.push(data[i].id);
             }
             setRenderedNFTS(updaterObject);
             console.log("updaterObject",updaterObject)
         }
-    }, [isSuccess])
+        if(isError){
+            handleCallsLimitError();
+        }
+
+    }, [isSuccess,isError])
 
     const renderTheNFTS = renderedNFTS.map(el=>{
         if(el !== "Loading..."){
@@ -27,22 +34,11 @@ export default function Nfts() {
 
     return (
         <div className="nftsInfoContainer flex flex-col  my-40">
-            <div className="nftInfo flex justify-between items-center ">
+            <div className="nftInfo flex flex-col justify-between items-center ">
                 <div className="grid grid-cols-3 gap-x-6 gap-y-10 w-full">
-                    {/* <div className="bg-main p-4 h-40 hover:shadow-lg ">
-                    </div>
-                    <div className="bg-main p-4 h-40 hover:shadow-lg">
-                    </div>
-                    <div className="bg-main p-4 h-40 hover:shadow-lg">
-                    </div>
-                    <div className="bg-main p-4 h-40 hover:shadow-lg">
-                    </div>
-                    <div className="bg-main p-4 h-40 hover:shadow-lg">
-                    </div>
-                    <div className="bg-main p-4 h-40 hover:shadow-lg">
-                    </div> */}
                     {renderTheNFTS}
                 </div>
+                <NavLink to={'/nfts'} className="w-full p-3 h-14 bg-main text-secondary hover:bg-lightMain text-center capitalize text-xl">learn more</NavLink>
             </div>
         </div>
     )
