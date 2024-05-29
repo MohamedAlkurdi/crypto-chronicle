@@ -13,7 +13,6 @@ export default function NftInfo({ id }) {
     const loadedNFTS = useSelector(state => state.NFTSslice.loadedNFTS);
     const is_429_error = useSelector(state => state.generalData.global_429_error);
     const {isSuccess, isError, data, error} = useGetNftByIdQuery(id);
-
     const [componentState, setComponentState] = useState({
         id,
         name: "Loading...",
@@ -56,10 +55,10 @@ export default function NftInfo({ id }) {
                 price: floor_price.usd,
                 homepage: links.homepage,
             };
-            const nftExists = loadedNFTS.find(nft => nft.id === id);
-            if (!nftExists) {
-                dispatch(addLoadedNFT(updaterObject));
-            }
+            // const nftExists = loadedNFTS.find(nft => nft.id === id);
+            // if (!nftExists) {
+            dispatch(addLoadedNFT(updaterObject));
+            // }
             setComponentState(updaterObject);
         }
     }, [isSuccess, loadedNFTS, id, dispatch, data]);

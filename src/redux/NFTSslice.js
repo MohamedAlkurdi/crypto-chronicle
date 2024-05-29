@@ -14,7 +14,6 @@ const initialState = {
     loadedNFTS: [],
     loadingMoreNfts:false,
     neededNfts: [],
-    NFTSloadingError:false,
 };
 
 const NFTSslice = createSlice({
@@ -27,12 +26,16 @@ const NFTSslice = createSlice({
                 state.loadedNFTS.push(action.payload);
             }
         },
+        setLoading:(state,action)=>{
+            state.loadingMoreNfts = action.payload;
+        }
     },
     extraReducers:(builder)=>{
         builder.addCase(loadMoreNFTS.pending, (state)=>{
             state.loadingMoreNfts = true
         });
         builder.addCase(loadMoreNFTS.fulfilled, (state, action) => {
+            state.loadingMoreNfts = true
             const data = action.payload;
             const randomIndices = randomSetOfNumbers(data.length);
             const randNfts = [];
@@ -40,20 +43,17 @@ const NFTSslice = createSlice({
             randomIndices.forEach((index) => {
                 randNfts.push(data[index].id);
             });
+
             state.neededNfts = [...new Set([...state.neededNfts, ...randNfts])];
-            state.loadingMoreNfts = false;
+
         });
-        builder.addCase(loadMoreNFTS.rejected, (state,action) => {
-            state.failedLoadingNfts = true;
-            state.loadingMoreNfts = false;
-            state.NFTSloadingError = true;
-            console.log("is error =====>:",action.error.code)
-            // if(action.error.code === 'ERR_BAD_REQUEST'){
-            // }
-            console.log("failed loading more data.");
+        builder.addCase(loadMoreNFTS.rejected, () => {
+            // state.failedLoadingNfts = true;
+            // state.loadingMoreNfts = false;
+            // state.NFTSloadingError = true;
         });
     }
 });
 
-export const { addLoadedNFT } = NFTSslice.actions;
+export const { addLoadedNFT, setLoading } = NFTSslice.actions;
 export default NFTSslice.reducer;

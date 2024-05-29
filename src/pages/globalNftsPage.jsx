@@ -2,19 +2,20 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useLocation } from "react-router-dom";
 import SingleNftDataDisplayer from "../components/singleNftDataDisplayer";
-import { loadMoreNFTS } from "../redux/NFTSslice";
+import { loadMoreNFTS, setLoading } from "../redux/NFTSslice";
 import NftInfo from "../components/nftInfo";
 import Skeleton from "../components/nftSectionSkeleton";
 
 export default function GlocalNftsPage() {
-    const [loading, setLoading] = useState(false)
+    const loadingError = useSelector(state => state.NFTSslice.NFTSloadingError)
     const dynamicNFTS = useSelector(state => state.NFTSslice.neededNfts);
+    const loadedData = useSelector(state => state.NFTSslice.loadedNFTS);
     // const isPageEmpty = useSelector(state => state.NFTSslice.isPageEmpty)
     const staticNFTS = useSelector(state => state.NFTSslice.loadedNFTS)
     const dispatch = useDispatch()
     // const [renderedNFTS, setRenderedNFTS] = useState([])
     const [staticNftsState, setStaticNftsState] = useState([])
-    const loadingNFTS = useSelector(state => state.NFTSslice.loadingMoreNfts)
+    const loading = useSelector(state => state.NFTSslice.loadingMoreNfts)
     const NFTSloadingError = useSelector(state => state.NFTSslice.NFTSloadingError)
     const [isPageEmpty, setIsPageEmpty] = useState(false);
     const location = useLocation();
@@ -35,28 +36,40 @@ export default function GlocalNftsPage() {
     //     console.log("loaded nfts:", dynamicNFTS)
     // }, [dynamicNFTS])
 
+    useEffect(()=>{
+        console.log(dynamicNFTS)
+    },[dynamicNFTS])
+
     const renderDynamicNFTS = dynamicNFTS.map(el => {
         if (el !== "Loading...") {
             return <NftInfo key={el} id={el} />
         }
     })
 
-    // const renderStaticNFTS = staticNftsState.map(el=>{
-    //     if(staticNftsState.length !== 0){
-    //         return <SingleNftDataDisplayer key={el.id} componentState={el} />
-    //     }
-    // })
+    useEffect(()=>{
+        setTimeout(()=>{
+            dispatch(setLoading(false))
+        },60000)
+    },[dynamicNFTS])
+
+    const renderStaticNFTS = staticNftsState.map(el=>{
+        if(staticNftsState.length !== 0){
+            return <SingleNftDataDisplayer key={el.id} componentState={el} />
+        }
+    })
 
 
-    function handleLoading() {
-        setLoading(true);
-        const timeOut = setTimeout(() => {
-            setLoading(false)
-        }, 60000)
-        return () => { clearTimeout(timeOut) }
-    }
+    // function handleLoading() {
+    //     dispatch(setLoading(true))
+    //     const timeOut = setTimeout(() => {
+    //         dispatch(setLoading(false))
+    //     }, 60000)
+    //     return () => { clearTimeout(timeOut) }
+    // }
+
     function handleLoadMore() {
-        handleLoading();
+        // handleLoading();
+        console.log("LLLLLLLLLOOOOOOOOOOOOOOOOAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDIIIIIIIIIIIIIIINNNNNNNNNNNNNNGGGGGGGGGGGGGGG")
         dispatch(loadMoreNFTS())
     }
 
@@ -67,6 +80,7 @@ export default function GlocalNftsPage() {
             }
         }
     }, [location])
+
     return (
         <>
             {
@@ -74,8 +88,8 @@ export default function GlocalNftsPage() {
                     <div className="nftsInfoContainer flex flex-col  my-40">
                         <div className="nftInfo flex flex-col justify-between items-center ">
                             <div className="grid grid-cols-3 gap-x-6 gap-y-10 w-full">
-                                {/* {renderStaticNFTS} */}
-                                {renderDynamicNFTS}
+                                {renderStaticNFTS}
+                                {/* {renderDynamicNFTS} */}
                             </div>
                             {
                                 loading ?
