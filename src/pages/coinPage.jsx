@@ -7,11 +7,14 @@ import TimeSliceOptions from "../components/timeSliceOptions";
 import { useDispatch } from "react-redux";
 import { setChartError } from "../redux/chartSlice";
 import DOMPurify from 'dompurify';
+import { handle_global_429_error } from "../redux/generalData";
+import { handleCallsLimitError } from "../modules/errorHandlers";
 
 export default function CoinPage() {
     const id = useParams().id.substring(1);
     const dispatch = useDispatch();
-    const { data, isSuccess } = useGetCoinByIdQuery(id);
+    const { data, isSuccess, isError, error } = useGetCoinByIdQuery(id);
+    const is_429_error = useSelector(state => state.generalData.global_429_error);
     const [coinsData, setCoinData] = useState({
         description: "loading...",
         image: defaultImage,
@@ -55,9 +58,23 @@ export default function CoinPage() {
         dispatch(setChartError(false));
     }, [isSuccess, data, dispatch]);
 
-    useEffect(() => {
-        console.log("fetched coin by id:", data);
-    }, [data]);
+    useEffect(()=>{
+        if(isError){
+            if(error.status === 429){
+                dispatch(handle_global_429_error(true))
+            }
+        }
+    },[isError])
+
+    useEffect(()=>{
+        if(is_429_error){
+            handleCallsLimitError()
+        }
+    },[is_429_error])
+
+    // useEffect(() => {
+    //     console.log("fetched coin by id:", data);
+    // }, [data]);
 
     return (
         <>

@@ -16,12 +16,18 @@ const initialState = {
     neededCoins: ["bitcoin", "ethereum", "0x", "ilcoin", "illuvium"],
     loadingMoreCoins: false,
     failedLoadingCoins: false,
+    global_429_error:false,
 };
 
 const generalData = createSlice({
     name: "generalSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        handle_global_429_error:(state,action)=>{
+            state.global_429_error = action.payload;
+            console.log("global_429_error state updated",action.payload);
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(loadMoreCoins.pending, (state) => {
             state.loadingMoreCoins = true;
@@ -40,10 +46,11 @@ const generalData = createSlice({
         builder.addCase(loadMoreCoins.rejected, (state) => {
             state.failedLoadingCoins = true;
             state.loadingMoreCoins = false;
+            state.global_429_error = true;
             console.log("failed loading more data.");
         });
     }
 });
 
-export const { setTimeSlice } = generalData.actions;
+export const { setTimeSlice,handle_global_429_error } = generalData.actions;
 export default generalData.reducer;

@@ -5,6 +5,8 @@ import './index.css'
 import store from './redux/store.js'
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom'
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './modules/errorBoundey.jsx'
 
 
 // const router = createBrowserRouter(
@@ -23,6 +25,7 @@ import { BrowserRouter } from 'react-router-dom'
 // )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <ErrorBoundary FallbackComponent={ErrorFallback}>
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
@@ -30,4 +33,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </BrowserRouter>
     </React.StrictMode>
   </Provider>
+  </ErrorBoundary>
 )

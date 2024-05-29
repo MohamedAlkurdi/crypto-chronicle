@@ -1,7 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { enableMapSet } from 'immer';
+import { randomSetOfNumbers } from "../modules/calculations";
+
+enableMapSet()
+
+export const loadMoreNFTS = createAsyncThunk("getMoreNftsData", async () => {
+    const response = await axios.get('https://api.coingecko.com/api/v3/nfts/list');
+    return response.data;
+});
 
 const initialState = {
-    loadedNFTS: []
+    loadedNFTS: [],
+    loadingMoreNfts:false,
+    neededNfts: [],
+    NFTSloadingError:false,
 };
 
 const NFTSslice = createSlice({
@@ -9,11 +22,36 @@ const NFTSslice = createSlice({
     initialState,
     reducers: {
         addLoadedNFT: (state, action) => {
-            const set = new Set(state.loadedNFTS);
-            set.add(action.payload);
-            state.loadedNFTS = Array.from(set);
-            state.loadedNFTS.len
-        }
+            const nftExists = state.loadedNFTS.find(nft => nft.id === action.payload.id);
+            if (!nftExists) {
+                state.loadedNFTS.push(action.payload);
+            }
+        },
+    },
+    extraReducers:(builder)=>{
+        builder.addCase(loadMoreNFTS.pending, (state)=>{
+            state.loadingMoreNfts = true
+        });
+        builder.addCase(loadMoreNFTS.fulfilled, (state, action) => {
+            const data = action.payload;
+            const randomIndices = randomSetOfNumbers(data.length);
+            const randNfts = [];
+
+            randomIndices.forEach((index) => {
+                randNfts.push(data[index].id);
+            });
+            state.neededNfts = [...new Set([...state.neededNfts, ...randNfts])];
+            state.loadingMoreNfts = false;
+        });
+        builder.addCase(loadMoreNFTS.rejected, (state,action) => {
+            state.failedLoadingNfts = true;
+            state.loadingMoreNfts = false;
+            state.NFTSloadingError = true;
+            console.log("is error =====>:",action.error.code)
+            // if(action.error.code === 'ERR_BAD_REQUEST'){
+            // }
+            console.log("failed loading more data.");
+        });
     }
 });
 

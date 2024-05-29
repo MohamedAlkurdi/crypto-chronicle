@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
-import {NavLink} from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useGetNftListQuery } from "../redux/API/apiSlice";
 import NftInfo from "./nftInfo";
 import { handleCallsLimitError } from "../modules/errorHandlers";
+import { useDispatch, useSelector } from "react-redux";
+import { handle_global_429_error } from "../redux/generalData";
 
 export default function Nfts() {
-    const { data, isSuccess, isError, isLoading } = useGetNftListQuery();
+    const { data, isSuccess, isError, isLoading, error } = useGetNftListQuery();
+    const loadingNFTS = useSelector(state => state.NFTSslice.loadingMoreNfts)
+    const NFTSloadingError = useSelector(state => state.NFTSslice.NFTSloadingError)
+    const dispatch = useDispatch()
+    const is_429_error = useSelector(state => state.generalData.global_429_error);
+    const location = useLocation();
     const [renderedNFTS, setRenderedNFTS] = useState([
         "Loading...",
     ])
@@ -17,19 +24,34 @@ export default function Nfts() {
                 updaterObject.push(data[i].id);
             }
             setRenderedNFTS(updaterObject);
-            console.log("updaterObject",updaterObject)
         }
-        if(isError){
+        if (isError) {
+            if (error.status === 429)
+                dispatch(handle_global_429_error(true))
             handleCallsLimitError();
         }
 
-    }, [isSuccess,isError])
+    }, [isSuccess, isError])
 
-    const renderTheNFTS = renderedNFTS.map(el=>{
-        if(el !== "Loading..."){
-        return <NftInfo key={el} id={el}/>
-    }
+    const renderTheNFTS = renderedNFTS.map(el => {
+        if (el !== "Loading...") {
+            return <NftInfo key={el} id={el} />
+        }
     })
+
+    useEffect(() => {
+        // if(location.pathname === "/nfts"){
+        //     if(loadedNFTS.length === 0){
+        //         dispatch
+        //     }
+        // }
+    }, [location])
+
+    useEffect(() => {
+        if (is_429_error) {
+            handleCallsLimitError()
+        }
+    }, [is_429_error])
 
     return (
         <div className="nftsInfoContainer flex flex-col  my-40">
