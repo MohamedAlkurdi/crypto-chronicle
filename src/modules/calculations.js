@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export function getRandomNumberInRange(min, max) {
+export function getRandomNumberInRange(min=0, max) {
     if (typeof min !== 'number' || typeof max !== 'number' || min > max) {
         throw new Error('Invalid input: min and max should be numbers and min should be less than or equal to max');
     }

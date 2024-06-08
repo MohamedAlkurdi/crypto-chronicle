@@ -1,7 +1,8 @@
-import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { enableMapSet } from 'immer';
 import { randomSetOfNumbers } from "../modules/calculations";
+import { getRandomNumberInRange } from "../modules/calculations";
 
 enableMapSet()
 
@@ -12,8 +13,9 @@ export const loadMoreNFTS = createAsyncThunk("getMoreNftsData", async () => {
 
 const initialState = {
     loadedNFTS: [],
-    loadingMoreNfts:false,
+    loadingMoreNfts: false,
     neededNfts: [],
+    staticNFTS: ["squiggly", "voxelglyph", "autoglyphs"]
 };
 
 const NFTSslice = createSlice({
@@ -26,12 +28,12 @@ const NFTSslice = createSlice({
                 state.loadedNFTS.push(action.payload);
             }
         },
-        setLoading:(state,action)=>{
+        setLoading: (state, action) => {
             state.loadingMoreNfts = action.payload;
         }
     },
-    extraReducers:(builder)=>{
-        builder.addCase(loadMoreNFTS.pending, (state)=>{
+    extraReducers: (builder) => {
+        builder.addCase(loadMoreNFTS.pending, (state) => {
             state.loadingMoreNfts = true
         });
         builder.addCase(loadMoreNFTS.fulfilled, (state, action) => {
@@ -39,13 +41,18 @@ const NFTSslice = createSlice({
             const data = action.payload;
             const randomIndices = randomSetOfNumbers(data.length);
             const randNfts = [];
-
+            const newId = data[getRandomNumberInRange(0,data.length)].id;
+            const existsInLocally = randNfts.some(el => (el.id === newId))
+            const existsGlobally = state.neededNfts.some(el => (el.id === newId))
+            while (randNfts.length < 3) { 
+                if (!existsInLocally || !existsGlobally) {
+                    randNfts.push(newId);
+                }
+            }
             randomIndices.forEach((index) => {
                 randNfts.push(data[index].id);
             });
-
             state.neededNfts = [...new Set([...state.neededNfts, ...randNfts])];
-
         });
         builder.addCase(loadMoreNFTS.rejected, () => {
             // state.failedLoadingNfts = true;

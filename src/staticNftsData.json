@@ -1,0 +1,26 @@
+[
+    {
+        "id":"squiggly",
+        "name":"Squiggly",
+        "description":"Randomly generated and fully on-chain squiggly lines, the first project in the Atlantes series. Only 100 pieces were created during the minting process. The on...(click for more details)",
+        "image":"https://coin-images.coingecko.com/nft_contracts/images/1332/small/squiggly.png?1707287785",
+        "price":80658,
+        "homepage":"https://www.squiggly.wtf/"
+    },
+    {
+        "id":"voxelglyph",
+        "name":"Voxelglyph",
+        "description":"The Voxelglyph represents membership to Fingerprints DAO and is the result of a direct partnership between Larva Labs and Fingerprints, granting access to all m...(click for more details)",
+        "image":"https://coin-images.coingecko.com/nft_contracts/images/3473/small/voxelglyph.png?1707290042",
+        "price":8972.23,
+        "homepage":"https://migration.fingerprintsdao.xyz"
+    },
+    {
+        "id":"autoglyphs",
+        "name":"Autoglyphs",
+        "description":"Autoglyphs are the first “on-chain” generative art on the Ethereum blockchain. A completely self-contained mechanism for the creation and ownership of an artwork.",
+        "image":"https://coin-images.coingecko.com/nft_contracts/images/437/small/autoglyphs.png?1707287318",
+        "price":514772,
+        "homepage":"https://www.larvalabs.com/autoglyphs"
+    }
+]
