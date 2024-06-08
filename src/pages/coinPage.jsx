@@ -4,7 +4,7 @@ import { useGetCoinByIdQuery } from "../redux/API/apiSlice";
 import defaultImage from '../assets/_d7457e79-4a4f-49eb-831c-99a1ff31f82f.jpg';
 import CoinChart from "../components/coinChart";
 import TimeSliceOptions from "../components/timeSliceOptions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setChartError } from "../redux/chartSlice";
 import DOMPurify from 'dompurify';
 import { handle_global_429_error } from "../redux/generalData";

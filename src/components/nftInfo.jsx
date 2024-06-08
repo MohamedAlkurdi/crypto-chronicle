@@ -22,7 +22,6 @@ export default function NftInfo({ id }) {
         homepage: "Loading..."
     });
 
-
     useEffect(() => {
         if (isError) {
             if(error.status===429){
@@ -48,10 +47,7 @@ export default function NftInfo({ id }) {
                 price: floor_price.usd,
                 homepage: links.homepage,
             };
-            // const nftExists = loadedNFTS.find(nft => nft.id === id);
-            // if (!nftExists) {
             dispatch(addLoadedNFT(updaterObject));
-            // }
             setComponentState(updaterObject);
         }
     }, [isSuccess, loadedNFTS, id, dispatch, data]);
