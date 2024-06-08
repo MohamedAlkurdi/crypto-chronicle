@@ -7,14 +7,16 @@ import { addFavCoin } from "../redux/favSlice";
 export default function CoinInfo({ id }) {
     const { vs_currency } = useSelector(state => state.generalData);
     const dispatch = useDispatch()
-    const selector = useSelector(state => state.favSlice.coins)
+    const favCoins = useSelector(state => state.favSlice.coins)
     const [fav,setFav] = useState(false);
 
     useEffect(()=>{
-        if(selector.includes(id)){
+        if(favCoins.includes(id)){
             setFav(true);
+        }else{
+            setFav(false);
         }
-    },[selector])
+    },[favCoins])
 
     function handleFav(e) {
         e.preventDefault();

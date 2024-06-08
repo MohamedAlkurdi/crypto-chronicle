@@ -6,15 +6,19 @@ import CoinChart from "../components/coinChart";
 import TimeSliceOptions from "../components/timeSliceOptions";
 import { useDispatch, useSelector } from "react-redux";
 import { setChartError } from "../redux/chartSlice";
+import { handleColor } from "../modules/dynamicStyles";
 import DOMPurify from 'dompurify';
 import { handle_global_429_error } from "../redux/generalData";
 import { handleCallsLimitError } from "../modules/errorHandlers";
+import { addFavCoin } from "../redux/favSlice";
 
 export default function CoinPage() {
     const id = useParams().id.substring(1);
     const dispatch = useDispatch();
     const { data, isSuccess, isError, error } = useGetCoinByIdQuery(id);
     const is_429_error = useSelector(state => state.generalData.global_429_error);
+    const favCoins = useSelector(state => state.favSlice.coins)
+    const [fav,setFav] = useState(false);
     const [coinsData, setCoinData] = useState({
         description: "loading...",
         image: defaultImage,
@@ -24,12 +28,18 @@ export default function CoinPage() {
         current_price: "loading...",
         changes: ['loading...']
     });
-    
-    function handleColor(input){
-        if(parseFloat(input) < 0){
-            return 'text-red-600'
+
+    useEffect(()=>{
+        if(favCoins.includes(id)){
+            setFav(true);
+        }else{
+            setFav(false);
         }
-        return 'text-green-600'
+    },[favCoins])
+
+    function handleFav(e) {
+        e.preventDefault();
+        dispatch(addFavCoin(id));
     }
 
     useEffect(() => {
@@ -72,20 +82,17 @@ export default function CoinPage() {
         }
     },[is_429_error])
 
-    // useEffect(() => {
-    //     console.log("fetched coin by id:", data);
-    // }, [data]);
-
     return (
         <>
             <div className="coinInfoPage flex flex-col gap-10 p-8">
-                <div className="coinOverview flex items-center gap-8 bg-secondary p-4 rounded-lg bg-gradient-to-br from-secondary from-30% to-darkSecondary to-70%">
+                <div className="coinOverview flex items-center gap-8 bg-secondary p-4 rounded-lg bg-gradient-to-br from-secondary from-30% to-darkSecondary to-70% relative">
                     <div className="nameImagePrice flex flex-col w-[20%] items-center gap-4 ">
                         <div className=" text-4xl text-main overflow-hidden text-center">{coinsData.localization}</div>
                         <img className="w-[80%] " src={coinsData.image} alt="Coin Image" />
                         <div className=" text-4xl text-main overflow-hidden">{coinsData.current_price}$</div>
                     </div>
                     <div className=" w-[80%] text-main" dangerouslySetInnerHTML={{ __html: (coinsData.description || "No desctiption available.") }}></div>
+                <button className=" w-7 h-7 absolute text-center text-lg text-main top-4 right-4 overflow-hidden" onClick={(handleFav)}><i className={`fa-${fav ? 'solid' : 'regular'} fa-heart w-full h-full`}></i></button>
                 </div>
                 <div className="additionalData flex items-center gap-8 bg-secondary p-4 rounded-lg text-main bg-gradient-to-tl from-darkSecondary from-30% to-secondary to-70% ">
                     <div className="stats w-1/2">

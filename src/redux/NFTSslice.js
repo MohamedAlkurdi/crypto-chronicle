@@ -59,6 +59,7 @@ const NFTSslice = createSlice({
         builder.addCase(loadMoreNFTS.rejected, (state) => {
             // state.failedLoadingNfts = true;
             state.loadingMoreNfts = false;
+            state.successfullyLoaded = false
             // state.NFTSloadingError = true;
         });
     }
