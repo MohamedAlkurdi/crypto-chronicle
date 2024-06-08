@@ -22,12 +22,6 @@ export default function NftInfo({ id }) {
         homepage: "Loading..."
     });
 
-    function shortenText(text = 'Loading...') {
-        if (text.length > 170) {
-            return text.slice(0, 160) + '...(click for more details)';
-        }
-        return text;
-    }
 
     useEffect(() => {
         if (isError) {
@@ -46,7 +40,6 @@ export default function NftInfo({ id }) {
     useEffect(() => {
         if (isSuccess) {
             let { name, description, image, floor_price, links } = data;
-            description = shortenText(description);
             const updaterObject = {
                 id,
                 name,

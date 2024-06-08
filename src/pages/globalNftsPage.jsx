@@ -6,38 +6,16 @@ import { loadMoreNFTS, setLoading } from "../redux/NFTSslice";
 import NftInfo from "../components/nftInfo";
 import Skeleton from "../components/nftSectionSkeleton";
 import staticNftsData from '../staticNftsData.json'
+import StaticNftSet from "../components/staticNftsSet";
 
 export default function GlocalNftsPage(){
-    const loadingError = useSelector(state => state.NFTSslice.NFTSloadingError)
     const dynamicNFTS = useSelector(state => state.NFTSslice.neededNfts);
-    // const loadedData = useSelector(state => state.NFTSslice.loadedNFTS);
     const staticNFTS = staticNftsData
     const dispatch = useDispatch()
-    const [staticNftsState, setStaticNftsState] = useState([])
     const loading = useSelector(state => state.NFTSslice.loadingMoreNfts)
-    const NFTSloadingError = useSelector(state => state.NFTSslice.NFTSloadingError)
+    const successfullyLoaded = useSelector(state => state.NFTSslice.successfullyLoaded)
     const [isPageEmpty, setIsPageEmpty] = useState(false);
     const location = useLocation();
-
-    // useEffect(() => {
-    //     console.log("renderedNFTS",renderedNFTS)
-    //     console.log("selector",dynamicNFTS)
-    //     setRenderedNFTS(dynamicNFTS)
-    // }, [dynamicNFTS])
-
-    // useEffect(()=>{
-    //     if(staticNFTS.length !== 0){ setStaticNftsState(staticNFTS)}
-    //     console.log("loaded nfts:",staticNFTS)
-    // },[staticNFTS])
-
-
-    // useEffect(() => {
-    //     console.log("loaded nfts:", dynamicNFTS)
-    // }, [dynamicNFTS])
-
-    useEffect(()=>{
-        console.log(staticNFTS)
-    },[staticNFTS])
 
     const renderDynamicNFTS = dynamicNFTS.map(el => {
         if (el !== "Loading...") {
@@ -45,11 +23,20 @@ export default function GlocalNftsPage(){
         }
     })
 
-    // useEffect(()=>{
-    //     setTimeout(()=>{
-    //         dispatch(setLoading(false))
-    //     },60000)
-    // },[dynamicNFTS])
+    useEffect(()=>{
+        let timeOut = null;
+        console.log("stage 1 ===> loading or successfullyLoaded changed");
+        if(successfullyLoaded && loading){
+            console.log("stage 2 ===> successfullyLoaded && loading condition succeed.")
+            timeOut = setTimeout(()=>{
+                dispatch(setLoading(false));
+                console.log("stage 3 ===> executed the timout function.")
+            },60000)
+        }
+
+        return () => clearTimeout(timeOut)
+
+    },[loading,successfullyLoaded])
 
     const renderStaticNFTS = staticNFTS.map(el=>{
             return <SingleNftDataDisplayer key={el.id} componentState={el} />
@@ -83,9 +70,9 @@ export default function GlocalNftsPage(){
             {
                 !isPageEmpty ?
                     <div className="nftsInfoContainer flex flex-col  my-40">
+                                <StaticNftSet/>
                         <div className="nftInfo flex flex-col justify-between items-center ">
                             <div className="grid grid-cols-3 gap-x-6 gap-y-10 w-full">
-                                {renderStaticNFTS}
                                 {renderDynamicNFTS}
                             </div>
                             {

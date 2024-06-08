@@ -22,5 +22,29 @@
         "image":"https://coin-images.coingecko.com/nft_contracts/images/437/small/autoglyphs.png?1707287318",
         "price":514772,
         "homepage":"https://www.larvalabs.com/autoglyphs"
+    },
+    {
+        "id":"adam-bomb-squad",
+        "name":"Adam Bomb Squad",
+        "description":"The Hundreds Official Adam Bomb Squad NFT Collectibles.",
+        "image":"https://coin-images.coingecko.com/nft_contracts/images/113/small/ADAM.jpg?1707287203",
+        "price":50.65,
+        "homepage":"http://adambombsquad.com"
+    },
+    {
+        "id":"project-aeon",
+        "name":"Project AEON",
+        "description":"If we could harness the power of God, could we flip the S&P500? \n\nDeep within the clandestine vaults of SPX6900 Labs, a radical research experiment codenamed \"Project AEON\" (click for more details)",
+        "image":"https://coin-images.coingecko.com/nft_contracts/images/3695/small/project-aeon.png?1707290147",
+        "price":306.81,
+        "homepage":"https://spx6900.com"
+    },
+    {
+        "id":"0xtama",
+        "name":"0xTama",
+        "description":"0xTama is a pixelated pass NFT series under Janshi Club Collections of Mahjong Meta. In Mahjong Meta game, Tama acts as a loyal pet NFT for Mahjong Meta players to participate in automated strategic mahjong battles, while 0xTama functions as a pfp collection of Tama and also an on-chain certificate for players to activate their in-game special benefits. Each season, various perks, additional rewards, and future exclusive privileges will be provided to players who bind this NFT and actively participate in Mahjong Meta competitions.",
+        "image":"https://coin-images.coingecko.com/nft_contracts/images/4280/small/0xtama.png?1712534415",
+        "price":33.27,
+        "homepage":"http://www.mjmeta.io"
     }
 ]

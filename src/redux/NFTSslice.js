@@ -14,6 +14,7 @@ export const loadMoreNFTS = createAsyncThunk("getMoreNftsData", async () => {
 const initialState = {
     loadedNFTS: [],
     loadingMoreNfts: false,
+    successfullyLoaded:false,
     neededNfts: [],
     staticNFTS: ["squiggly", "voxelglyph", "autoglyphs"]
 };
@@ -37,7 +38,8 @@ const NFTSslice = createSlice({
             state.loadingMoreNfts = true
         });
         builder.addCase(loadMoreNFTS.fulfilled, (state, action) => {
-            state.loadingMoreNfts = true
+            // state.loadingMoreNfts = false
+            state.successfullyLoaded = true
             const data = action.payload;
             const randomIndices = randomSetOfNumbers(data.length);
             const randNfts = [];
@@ -54,9 +56,9 @@ const NFTSslice = createSlice({
             });
             state.neededNfts = [...new Set([...state.neededNfts, ...randNfts])];
         });
-        builder.addCase(loadMoreNFTS.rejected, () => {
+        builder.addCase(loadMoreNFTS.rejected, (state) => {
             // state.failedLoadingNfts = true;
-            // state.loadingMoreNfts = false;
+            state.loadingMoreNfts = false;
             // state.NFTSloadingError = true;
         });
     }
