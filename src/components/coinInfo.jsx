@@ -31,6 +31,8 @@ export default function CoinInfo({ id }) {
         last_updated_at: "loading...",
     })
 
+    // the following code is commented to prevent the api call limit problems.
+
     // const coinSummary = useCoinSummaryQuery(id);
     // useEffect(()=>{
     //     if(coinSummary.isError){

@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavNft } from "../redux/favSlice";
 
 export default function SingleNftDataDisplayer({ componentState }){
-    const selector = useSelector(state => state.favSlice.nfts)
+    const favNfts = useSelector(state => state.favSlice.nfts)
     const [fav,setFav] = useState(false);
     const dispatch = useDispatch();
+    const {id,image,name,price,description,homepage} = componentState;
 
     
     function shortenText(text = 'Loading...') {
@@ -17,21 +18,19 @@ export default function SingleNftDataDisplayer({ componentState }){
     }
 
     useEffect(()=>{
-        if(selector.includes(id)){
-            setFav(true);
-        }
-    },[selector])
+        const isFav = favNfts.some(el=>el.id === id)
+        setFav(isFav);
+    },[favNfts])
 
     function handleFav(e) {
         e.preventDefault();
-        dispatch(addFavNft(id));
+        dispatch(addFavNft({id,name,image}));
     }
 
     function handleLinkClick(e){
         e.preventDefault()
         e.stopPropagation()
     }
-    const {id,image,name,price,description,homepage} = componentState;
     return (
         <NavLink to={`/nft/:${id}`} className="coinInfo  hover:bg-darkMainBg h-auto border-t-2 border-t-main p-4 ">
             <div className="nftBox flex flex-col justify-between w-full items-center relative">

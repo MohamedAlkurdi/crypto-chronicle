@@ -11,6 +11,7 @@ import NftPage from './pages/nftPage.jsx'
 import GlobalCoinsPage from './pages/globalCoinsPage.jsx'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/home.jsx'
+import FavItmes from './pages/favItems.jsx'
 
 // import { useGlobalQuery } from './redux/API/apiSlice'
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/coins" element={<GlobalCoinsPage />} />
         <Route path="/nfts" element={<GlobalNftsPage />} />
+        <Route path="/fav" element={<FavItmes />} />
         <Route path="/exchanges" element={<Exchanges />} />
         <Route path="/coin/:id" element={<CoinPage />} />
         <Route path="/nft/:id" element={<NftPage />} />

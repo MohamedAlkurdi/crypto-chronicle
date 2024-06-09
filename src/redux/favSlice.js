@@ -11,20 +11,20 @@ const favSlice = createSlice({
     reducers: {
         addFavCoin: (state, action) => {
             const favItem = action.payload;
-            if (!state.coins.includes(favItem)) {
+            const allreadyExist = state.coins.some(el => el === favItem);
+            if (!allreadyExist) {
                 state.coins.push(favItem);
             } else {
-                // Remove item if already exists
                 state.coins = state.coins.filter((el) => el !== favItem);
             }
         },
         addFavNft: (state, action) => {
             const favItem = action.payload;
-            if (!state.nfts.includes(favItem)) {
+            const allreadyExist = state.nfts.some(el => el.id === favItem.id);
+            if (!allreadyExist) {
                 state.nfts.push(favItem);
             } else {
-                // Remove item if already exists
-                state.nfts = state.nfts.filter((el) => el !== favItem);
+                state.nfts = state.nfts.filter((el) => el.id !== favItem.id);
             }
         },
     },
