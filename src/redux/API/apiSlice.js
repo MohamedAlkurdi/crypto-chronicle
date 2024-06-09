@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { buildErrorMessage } from "vite";
 
 const baseQuery = fetchBaseQuery({ baseUrl: 'https://api.coingecko.com/api/v3' })
 
@@ -59,6 +60,18 @@ export const apiSlice = createApi({
                 url:`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=${vs_currency}&include_market_cap=${include_market_cap}&include_24hr_vol=${include_24hr_vol}&include_24hr_change=${include_24hr_change}&include_last_updated_at=${include_last_updated_at}`,
                 method:'get',
             })
+        }),
+        GetExchanges:builder.query({
+            query:()=>({
+                url:`https://api.coingecko.com/api/v3/exchanges`,
+                method:"get",
+            })
+        }),
+        GetSingleExchange:builder.query({
+            query:(id)=>({
+                url:`https://api.coingecko.com/api/v3/exchanges/${id}`,
+                method:'get',
+            })
         })
     })
 })
@@ -73,4 +86,6 @@ export const {
     useSearchQuery,
     useGlobalQuery,
     useCoinSummaryQuery,
+    useGetExchangesQuery,
+    useGetSingleExchangeQuery
 } = apiSlice

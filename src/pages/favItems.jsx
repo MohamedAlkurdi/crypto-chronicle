@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import CoinInfo from "../components/coinInfo"
 import FavNft from "../components/favNft"
@@ -6,10 +6,13 @@ import FavNft from "../components/favNft"
 export default function FavItmes() {
     const favCoins = useSelector(state => state.favSlice.coins)
     const favNFTS = useSelector(state => state.favSlice.nfts)
+    const [empty,setEmpty] = useState({
+        coins:true,
+        nfts:true
+    })
 
     useEffect(() => {
-        console.log("favCoins", favCoins);
-        console.log("favNFTS", favNFTS);
+        setEmpty({...empty,coins:!(favCoins.length > 0), nfts:!(favNFTS.length > 0) })
     }, [favCoins, favNFTS])
 
     const renderFavCoins = favCoins.map(el => {
@@ -22,9 +25,9 @@ export default function FavItmes() {
     return (
         <>
             <h1>favourite coins:</h1>
-            {renderFavCoins}
+            {empty.coins ? "No fav coins..." : renderFavCoins}
             <h1>favourite coins:</h1>
-            {renderFavNfts}
+            {empty.nfts ? "No fav nfts..." : renderFavNfts}
         </>
     )
 }
