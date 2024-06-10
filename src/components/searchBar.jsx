@@ -1,21 +1,34 @@
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
 
-export default function SearchBar(){
-    const [theme,setTheme] = useState('moon')
-    return(
+export default function SearchBar() {
+    const [theme, setTheme] = useState('moon')
+    const [searchInput, setSearchInput] = useState("")
+
+    function handleSeachInput(e) {
+        setSearchInput(e.target.value);
+    }
+
+    return (
         <div className="searchBar flex items-center justify-between py-4 px-6 custom_box_shadow ">
             <div className="searchInputContainer flex-1">
-            <input type="text" placeholder="Search...." className="seachInput w-[80%] h-[44px] text-xl p-2 rounded-lg bg-main placeholder:text-secondary text-secondary focus:outline-none" />
+                <input
+                    type="text"
+                    placeholder="Search...."
+                    value={searchInput}
+                    onChange={handleSeachInput}
+                    className="seachInput w-[80%] h-[44px] text-xl p-2 rounded-lg bg-main placeholder:text-secondary text-secondary focus:outline-none" />
             </div>
             <div className="preferencesContaienr flex items-center justify-between w-1/3">
-            <select className="text-xl p-2 rounded-lg bg-main text-secondary focus:outline-none h-[44px] text-xl" name="vsCurrency" id="">
-                <option value="usd">usd</option>
-                <option value="eur">eur</option>
-                <option value="tr">tr</option>
-            </select>
-            <button><i className={`fa-solid fa-${theme} p-2 rounded-lg bg-main text-secondary text-xl w-[44px] h-[44px] flex items-center justify-center`}></i></button>
-            <NavLink className='p-2 rounded-lg bg-main text-secondary h-[44px] flex items-center justify-center text-xl capitalize' to='/fav'>fav elements</NavLink>
+                <select className="text-xl p-2 rounded-lg bg-main text-secondary focus:outline-none h-[44px] text-xl" name="vsCurrency" id="">
+                    <option value="usd">usd</option>
+                    <option value="eur">eur</option>
+                    <option value="tr">tr</option>
+                </select>
+                <button>
+                    <i className={`fa-solid fa-${theme} p-2 rounded-lg bg-main text-secondary text-xl w-[44px] h-[44px] flex items-center justify-center`}></i>
+                </button>
+                <NavLink className='p-2 rounded-lg bg-main text-secondary h-[44px] flex items-center justify-center text-xl capitalize' to='/fav'>fav elements</NavLink>
             </div>
         </div>
     )

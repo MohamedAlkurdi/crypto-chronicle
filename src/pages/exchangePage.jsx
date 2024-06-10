@@ -30,7 +30,8 @@ export default function ExchangePage() {
     })
 
     useEffect(() => {
-        setFav(favExchanges.includes(id))
+        const isFav = favExchanges.some(el=>( el.id === id));
+        setFav(isFav)
     }, [favExchanges])
 
     useEffect(() => {
@@ -83,7 +84,7 @@ export default function ExchangePage() {
 
     function handleFav(e) {
         e.preventDefault();
-        dispatch(handleNewExchange({ id, name, year_established, image, trust_score_rank }));
+        dispatch(handleNewExchange({ id, name:exchangeData.name, year_established:exchangeData.year_established, image:exchangeData.image, trust_score_rank:exchangeData.trust_score_rank }));
     }
 
     useEffect(() => {
@@ -101,15 +102,15 @@ export default function ExchangePage() {
                 <button className=" w-7 h-7 absolute text-center text-lg text-main top-4 right-4 overflow-hidden" onClick={(handleFav)}><i className={`fa-${fav ? 'solid' : 'regular'} fa-heart w-full h-full`}></i></button>
             </div>
             <div className="additionalData flex items-center gap-8 bg-secondary p-4 rounded-lg text-main bg-gradient-to-tl from-darkSecondary from-30% to-secondary to-70% ">
-                <div className="stats w-1/2">
+                <div className="stats w-full">
                     <div className=" text-xl"><span className="capitalize">Year established: </span> {exchangeData.year_established}</div>
                 </div>
-                <div className="stats w-1/2">
+                <div className="stats w-full">
                     <div className=" text-xl"><span className="originCountry">Origin country: </span> {exchangeData.country}</div>
                 </div>
             </div>
             <div className="additionalData flex items-center gap-8 bg-secondary p-4 rounded-lg text-main bg-gradient-to-tl from-darkSecondary from-30% to-secondary to-70% ">
-                <div className="stats w-1/2">
+                <div className="stats w-full">
                     <div className=" text-xl"><span className="marketSells">bitcoin trade volume in the last 24 hours: </span> {exchangeData.trade_volume_24h_btc}</div>
                 </div>
             </div>

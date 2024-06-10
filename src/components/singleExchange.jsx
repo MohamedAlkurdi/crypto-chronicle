@@ -9,6 +9,7 @@ export default function SingleExchange({ exchangeData }) {
     const favExchanges = useSelector(state => state.favSlice.exchanges)
     const dispatch = useDispatch();
     const [fav,setFav] = useState(false);
+    console.log("passed data to single exchange compoenent:",exchangeData)
     const { id, name, year_established, image, trust_score_rank } = exchangeData
 
     useEffect(()=>{
