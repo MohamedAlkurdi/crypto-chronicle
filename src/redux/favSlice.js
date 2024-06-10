@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     coins: [],
     nfts: [],
+    exchanges:[],
 }
 
 const favSlice = createSlice({
@@ -27,8 +28,17 @@ const favSlice = createSlice({
                 state.nfts = state.nfts.filter((el) => el.id !== favItem.id);
             }
         },
+        handleNewExchange:(state,action)=>{
+            const favExchange = action.payload;
+            const allreadyExist = state.exchanges.some(el => el.id === favExchange.id);
+            if (!allreadyExist) {
+                state.exchanges.push(favExchange);
+            } else {
+                state.exchanges = state.exchanges.filter((el) => el.id !== favExchange.id);
+            }
+        }
     },
 });
 
-export const { addFavCoin, addFavNft } = favSlice.actions;
+export const { addFavCoin, addFavNft, handleNewExchange } = favSlice.actions;
 export default favSlice.reducer;

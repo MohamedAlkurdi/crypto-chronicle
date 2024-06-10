@@ -6,12 +6,13 @@ import NotFound from './pages/notFound.jsx'
 import Login from './pages/login.jsx'
 import SignUp from './pages/signup.jsx'
 import GlobalNftsPage from './pages/globalNftsPage.jsx'
-import Exchanges from './pages/exchanges.jsx'
+import Exchanges from './pages/exchanges'
 import NftPage from './pages/nftPage.jsx'
 import GlobalCoinsPage from './pages/globalCoinsPage.jsx'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/home.jsx'
 import FavItmes from './pages/favItems.jsx'
+import ExchangePage from './pages/exchangePage.jsx'
 
 // import { useGlobalQuery } from './redux/API/apiSlice'
 
@@ -38,6 +39,8 @@ function App() {
         <Route path="/exchanges" element={<Exchanges />} />
         <Route path="/coin/:id" element={<CoinPage />} />
         <Route path="/nft/:id" element={<NftPage />} />
+        <Route path="/singleExchange/:id" element={<ExchangePage />} />
+
       </Routes>
     </div>
   )

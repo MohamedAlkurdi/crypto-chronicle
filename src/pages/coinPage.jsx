@@ -30,11 +30,7 @@ export default function CoinPage() {
     });
 
     useEffect(()=>{
-        if(favCoins.includes(id)){
-            setFav(true);
-        }else{
-            setFav(false);
-        }
+        setFav(favCoins.includes(id))
     },[favCoins])
 
     function handleFav(e) {

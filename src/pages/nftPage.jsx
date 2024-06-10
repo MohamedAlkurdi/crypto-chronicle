@@ -28,11 +28,7 @@ export default function NftPage() {
     });
 
     useEffect(() => {
-        if (favNFTS.includes(id)) {
-            setFav(true);
-        }else{
-            setFav(false);
-        }
+        setFav(favNFTS.includes(id))
     }, [favNFTS])
 
     function handleFav(e) {

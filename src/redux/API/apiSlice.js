@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { buildErrorMessage } from "vite";
+// import { buildErrorMessage } from "vite";
 
 const baseQuery = fetchBaseQuery({ baseUrl: 'https://api.coingecko.com/api/v3' })
 
