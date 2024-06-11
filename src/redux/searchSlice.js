@@ -8,30 +8,41 @@ export const search = createAsyncThunk("search", async (query)=>{
 
 
 const initialState = {
-    searchInput :"",
     searching:false,
-    Match:false,
-    output:[],
+    match:false,
+    error:false,
+    output:{
+        coins:[],
+        nfts:[],
+        exchanges:[],
+    },
 }
 
 const searchSlice = createSlice({
     name:"searchSlice",
     initialState,
     reducers:{
-        updateSearchInput:(state,action)=>{
-            state.searchInput = action.payload;
-        },
+
     },
     extraReducers:(builder)=>{
-        builder.addCase(search.pending, (state,action)=>{
+        builder.addCase(search.pending, (state)=>{
             state.searching = true;
         });
         builder.addCase(search.fulfilled,(state,action)=>{
             state.searching = false;
-            state.Match = true;
+            const {coins, nfts, exchanges} = action.payload;
+            state.output.coins = coins;
+            state.output.nfts = nfts;
+            state.output.exchanges = exchanges;
+            const lengths = [coins.length,nfts.length,exchanges.length]
+            const isEmpty = lengths.some(el => el > 0)
+            state.match = isEmpty;
         });
-        builder.addCase(search.rejected,(state,action)=>{
+        builder.addCase(search.rejected,(state)=>{
             state.searching = false;
+            state.error =true;
         });
     }
 })
+
+export default searchSlice.reducer;
