@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { search } from "../redux/searchSlice";
+import { clearLastSearchOutput, search } from "../redux/searchSlice";
 import { handleCallsLimitError } from "../modules/errorHandlers";
 import SearchOutput from "./searchOutput";
 
@@ -11,7 +11,10 @@ export default function SearchComponent({ close }) {
 
     function closeComponent(e) {
         const out = e.target.classList[0];
-        if (out === "searchComponentContainer" || out === "closeButton") close();
+        if (out === "searchComponentContainer" || out === "closeButton"){
+            close();
+            dispatch(clearLastSearchOutput());
+        } 
     }
 
     function handleTextChange(e){
@@ -32,7 +35,7 @@ export default function SearchComponent({ close }) {
         <div
             onClick={closeComponent}
             className="searchComponentContainer w-[100vw] h-[100vh] bg-opacity-50 bg-black fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
-            <div className="relative w-[90vw] h-[90vh] z-50 overflow-visible bg-main rounded-lg top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-9">
+            <div className="relative w-[90vw] h-[90vh] overflow-y-auto overflow-x-hidden z-50 overflow-visible bg-main rounded-lg top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-9">
                 <div className="searchBar w-full flex">
                     <input type="text"
                     value={searchInput}
@@ -44,10 +47,11 @@ export default function SearchComponent({ close }) {
                     className="w-full p-2 text-xl bg-secondary rounded-tr-lg rounded-br-lg capitalize text-main">submit</button>
                 </div>
             <SearchOutput/>
-                <button
-                    onClick={closeComponent}
-                    className="closeButton absolute top-[-15px] right-[-15px] bg-white w-[40px] h-[40px] flex items-center justify-center rounded-[50%] text-xl">X</button>
+                
             </div>
+            <button
+                    onClick={closeComponent}
+                    className="closeButton absolute top-[10px] right-[10px] bg-white w-[40px] h-[40px] flex items-center justify-center rounded-[50%] text-xl">X</button>
         </div>
     )
 }

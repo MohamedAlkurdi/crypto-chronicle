@@ -22,7 +22,9 @@ const searchSlice = createSlice({
     name:"searchSlice",
     initialState,
     reducers:{
-
+        clearLastSearchOutput:(state)=>{
+            state.output = {coins:[],nfts:[],exchanges:[],}
+        }
     },
     extraReducers:(builder)=>{
         builder.addCase(search.pending, (state)=>{
@@ -45,4 +47,5 @@ const searchSlice = createSlice({
     }
 })
 
+export const {clearLastSearchOutput} = searchSlice.actions;
 export default searchSlice.reducer;
