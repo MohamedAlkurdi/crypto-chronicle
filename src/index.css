@@ -43,10 +43,15 @@ a {
 
 *::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--secondary);
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: var(--secondary);
+    background-color: var(--main);
+}
+
+.pageHeight{
+    height: calc(100vh - 160px);
 }
 
 @font-face {

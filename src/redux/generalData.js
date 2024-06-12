@@ -17,6 +17,7 @@ const initialState = {
     loadingMoreCoins: false,
     failedLoadingCoins: false,
     global_429_error:false,
+    global_440_error:false,
 };
 
 const generalData = createSlice({
@@ -26,6 +27,10 @@ const generalData = createSlice({
         handle_global_429_error:(state,action)=>{
             state.global_429_error = action.payload;
             console.log("global_429_error state updated",action.payload);
+        },
+        handle_global_404_error:(state,action)=>{
+            state.global_404_error = action.payload;
+            console.log("global_404_error state updated",action.payload);
         }
     },
     extraReducers: (builder) => {
@@ -52,5 +57,5 @@ const generalData = createSlice({
     }
 });
 
-export const { setTimeSlice,handle_global_429_error } = generalData.actions;
+export const { setTimeSlice,handle_global_429_error,handle_global_404_error } = generalData.actions;
 export default generalData.reducer;

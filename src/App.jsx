@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './components/navbar'
 import SearchBar from './components/searchBar'
 import CoinPage from './pages/coinPage.jsx'
@@ -9,7 +9,7 @@ import GlobalNftsPage from './pages/globalNftsPage.jsx'
 import Exchanges from './pages/exchanges'
 import NftPage from './pages/nftPage.jsx'
 import GlobalCoinsPage from './pages/globalCoinsPage.jsx'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/home.jsx'
 import FavItmes from './pages/favItems.jsx'
 import ExchangePage from './pages/exchangePage.jsx'
@@ -17,17 +17,23 @@ import ExchangePage from './pages/exchangePage.jsx'
 // import { useGlobalQuery } from './redux/API/apiSlice'
 
 function App() {
-  // const global = useGlobalQuery()
-
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    // console.log("hook test:",global.data.coins);
-  })
+    setIsSubscribing(location.pathname === '/login' || location.pathname === '/signup');
+  }, [location.pathname]);
 
   return (
     <div className="App w-full h-screen bg-mainBG">
-      <Navbar />
-      <SearchBar />
+      {
+        isSubscribing ?
+          "" :
+          <>
+            <Navbar />
+            <SearchBar /></>
+      }
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
@@ -40,7 +46,6 @@ function App() {
         <Route path="/coin/:id" element={<CoinPage />} />
         <Route path="/nft/:id" element={<NftPage />} />
         <Route path="/singleExchange/:id" element={<ExchangePage />} />
-
       </Routes>
     </div>
   )

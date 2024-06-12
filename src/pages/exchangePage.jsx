@@ -3,13 +3,16 @@ import { useParams } from "react-router-dom";
 import { useGetSingleExchangeQuery } from "../redux/API/apiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { handle_global_429_error } from "../redux/generalData";
+import { handle_global_404_error } from "../redux/generalData";
 import { handleCallsLimitError } from "../modules/errorHandlers";
 import { handleNewExchange } from "../redux/favSlice";
+import Server_404 from "./server_404";
 
 export default function ExchangePage() {
     const id = useParams().id.substring(1);
     const { data, isSuccess, isError, error } = useGetSingleExchangeQuery(id)
     const is_429_error = useSelector(state => state.generalData.global_429_error);
+    const is_404_error = useSelector(state => state.generalData.global_404_error);
     const favExchanges = useSelector(state => state.favSlice.exchanges)
     const dispatch = useDispatch()
     const [fav, setFav] = useState(false);
@@ -39,6 +42,9 @@ export default function ExchangePage() {
             if (error.status === 429) {
                 dispatch(handle_global_429_error(true))
             }
+            if (error.status === 404) {
+                dispatch(handle_global_404_error(true))
+            }
         }
     }, [isError])
 
@@ -46,7 +52,10 @@ export default function ExchangePage() {
         if (is_429_error) {
             handleCallsLimitError()
         }
-    }, [is_429_error])
+        if(is_429_error){
+            console.log("404 error detected!!!!!!!!!!!!!!!!");
+        }
+    }, [is_429_error,is_404_error])
 
     useEffect(() => {
         if (isSuccess) {
@@ -91,6 +100,8 @@ export default function ExchangePage() {
         console.log("exchange page id:", id);
     }, [id])
     return (
+        <>
+        {is_404_error? <Server_404/> :
         <div className="exchangeInfoPage flex flex-col gap-10 p-8">
             <div className="exchangeOverview flex items-center gap-8 bg-secondary p-4 rounded-lg bg-gradient-to-br from-secondary from-30% to-darkSecondary to-70% relative">
                 <div className="nameImagePrice flex flex-col w-[20%] items-center gap-4 ">
@@ -128,5 +139,7 @@ export default function ExchangePage() {
                 ))}
             </div>
         </div>
+        }
+        </>
     )
 }

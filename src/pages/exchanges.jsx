@@ -25,6 +25,7 @@ export default function Exchanges() {
             if (error.status === 429) {
                 dispatch(handle_global_429_error(true))
             }
+
         }
     }, [isError]);
 
@@ -32,6 +33,7 @@ export default function Exchanges() {
         if (is_429_error) {
             handleCallsLimitError();
         }
+
     }, [is_429_error])
 
     useEffect(() => {
