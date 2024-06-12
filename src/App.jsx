@@ -13,6 +13,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/home.jsx'
 import FavItmes from './pages/favItems.jsx'
 import ExchangePage from './pages/exchangePage.jsx'
+import Footer from './components/footer.jsx'
 
 // import { useGlobalQuery } from './redux/API/apiSlice'
 
@@ -47,6 +48,11 @@ function App() {
         <Route path="/nft/:id" element={<NftPage />} />
         <Route path="/singleExchange/:id" element={<ExchangePage />} />
       </Routes>
+
+      {
+        isSubscribing ?
+          "" : <Footer/>
+      }
     </div>
   )
 }
