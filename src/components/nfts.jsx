@@ -6,6 +6,7 @@ import { handleCallsLimitError } from "../modules/errorHandlers";
 import { useDispatch, useSelector } from "react-redux";
 import { handle_global_429_error } from "../redux/generalData";
 import StaticNftSet from "./staticNftsSet";
+import Heading from "./heading";
 
 export default function Nfts() {
     const { data, isSuccess, isError, isLoading, error } = useGetNftListQuery();
@@ -55,12 +56,14 @@ export default function Nfts() {
     }, [is_429_error])
 
     return (
+        <>
         <div className="nftsInfoContainer flex flex-col">
-            <div className="nftInfo flex flex-col justify-between items-center ">
+            <div className="nftInfo bg-mainBG flex flex-col justify-between items-center ">
                 <StaticNftSet/>
-                <NavLink to={'/nfts'} className="w-full p-3 h-14 bg-main text-secondary hover:bg-lightMain text-center capitalize text-xl">learn more</NavLink>
+                <NavLink to={'/nfts'} className="w-1/4 rounded-lg mt-10 p-3 h-14 bg-main text-secondary hover:bg-lightMain text-center capitalize text-xl">learn more</NavLink>
             </div>
         </div>
+        </>
     )
 }
 

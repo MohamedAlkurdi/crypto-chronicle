@@ -6,6 +6,7 @@ import NftInfo from "../components/nftInfo";
 import Skeleton from "../components/nftSectionSkeleton";
 import staticNftsData from '../staticNftsData.json'
 import StaticNftSet from "../components/staticNftsSet";
+import Heading from "../components/heading";
 
 export default function GlocalNftsPage() {
     const dynamicNFTS = useSelector(state => state.NFTSslice.neededNfts);
@@ -46,18 +47,20 @@ export default function GlocalNftsPage() {
 
     return (
         <>
+            <Heading title={"nfts page"} />
+
             {
                 !isPageEmpty ?
-                    <div className="nftsInfoContainer flex flex-col  my-40">
+                    <div className="nftsInfoContainer bg-mainBG flex flex-col pb-40 ng-mainBG">
                         <StaticNftSet />
                         <div className="nftInfo flex flex-col justify-between items-center ">
-                            <div className="grid grid-cols-3 gap-x-6 gap-y-10 w-full">
+                            <div className="grid grid-cols-3 gap-x-6 gap-y-10 w-full bg-mainBG">
                                 {renderDynamicNFTS}
                             </div>
                             {
                                 loading ?
-                                    <div className="w-full p-3 rounded-lg h-14 bg-secondary text-center capitalize text-xl">one minute...</div>
-                                    : <button onClick={handleLoadMore} className="w-full p-3 rounded-lg h-14 bg-secondary hover:bg-darkSecondary capitalize text-xl ">load more</button>
+                                <div className="w-1/4 mt-6 p-3 rounded-lg h-14 bg-secondary text-center capitalize text-xl cursor-not-allowed">one minute...</div>
+                                    : <button onClick={handleLoadMore} className="w-1/4 mt-10 p-3 rounded-lg h-14 bg-secondary hover:bg-darkSecondary capitalize text-xl ">load more</button>
                             }
                         </div>
                     </div>

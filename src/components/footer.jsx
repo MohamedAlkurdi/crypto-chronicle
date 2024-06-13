@@ -12,7 +12,7 @@ export default function Footer() {
     })
 
     return (
-        <div className="footer w-full bg-main p-10 flex flex-col mt-24">
+        <div className="footer w-full bg-main p-10 flex flex-col">
             <div className="servicesAndMedia flex mb-12">
                 <div className="services flex flex-col justify-between w-2/3">
                     <h1 className="text-xl capitalize text-mainBG">services:</h1>

@@ -53,10 +53,8 @@ export default function NftInfo({ id }) {
     }, [isSuccess, loadedNFTS, id, dispatch, data]);
 
     return (
-        <NavLink to={`/nft/:${id}`} className="coinInfo hover:bg-darkMainBg h-auto border-t-2 border-t-main p-4">
             <SingleNftDataDisplayer
                 componentState={componentState}
             />
-        </NavLink>
     );
 }

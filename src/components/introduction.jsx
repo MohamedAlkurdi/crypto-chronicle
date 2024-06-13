@@ -1,12 +1,12 @@
 export default function Introduction() {
     return (
-        <section className="container relative flex flex-col justify-between max-w-6xl px-10 mx-auto xl:px-0 mt-5">
+        <section className="w-full bg-mainBG relative flex flex-col justify-between items-center pl-10 pt-5">
             <div className="w-full">
                 <div className="flex flex-col w-full mb-10 sm:flex-row">
                     <div className="w-full mb-10 sm:mb-0 sm:w-1/2">
                         <div className="relative h-full ml-0 mr-0 sm:mr-10">
                             <span className="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-main rounded-lg"></span>
-                            <div className="relative h-full p-5 bg-white border-2 border-main rounded-lg">
+                            <div className="relative h-full p-5 bg-mainBG border-2 border-main rounded-lg">
                                 <div className="flex items-center -mt-1">
                                     <h3 className="my-2 ml-3 text-lg font-bold text-main">Explore Various Coins </h3>
                                 </div>
@@ -18,7 +18,7 @@ export default function Introduction() {
                     <div className="w-full h-auto sm:w-1/2">
                         <div className="relative h-full ml-0 md:mr-10">
                             <span className="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-main rounded-lg"></span>
-                            <div className="relative h-full p-5 bg-white border-2 border-main rounded-lg">
+                            <div className="relative h-full p-5 bg-mainBG border-2 border-main rounded-lg">
                                 <div className="flex items-center -mt-1">
                                     <h3 className="my-2 ml-3 text-lg font-bold text-main">Browse NFTs</h3>
                                 </div>
@@ -32,7 +32,7 @@ export default function Introduction() {
                     <div className="w-full mb-10 sm:mb-0 sm:w-1/2">
                         <div className="relative h-full ml-0 mr-0 sm:mr-10">
                             <span className="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-main rounded-lg"></span>
-                            <div className="relative h-full p-5 bg-white border-2 border-main  rounded-lg">
+                            <div className="relative h-full p-5 bg-mainBG border-2 border-main  rounded-lg">
                                 <div className="flex items-center -mt-1">
                                     <h3 className="my-2 ml-3 text-lg font-bold text-main">Top Exchanges</h3>
                                 </div>
@@ -44,7 +44,7 @@ export default function Introduction() {
                     <div className="w-full mb-10 sm:mb-0 sm:w-1/2">
                         <div className="relative h-full ml-0 mr-0 sm:mr-10">
                             <span className="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-main rounded-lg"></span>
-                            <div className="relative h-full p-5 bg-white border-2 border-main rounded-lg">
+                            <div className="relative h-full p-5 bg-mainBG border-2 border-main rounded-lg">
                                 <div className="flex items-center -mt-1">
                                     <h3 className="my-2 ml-3 text-lg font-bold text-main">Advanced Search</h3>
                                 </div>
@@ -56,7 +56,7 @@ export default function Introduction() {
                     <div className="w-full sm:w-1/2">
                         <div className="relative h-full ml-0 md:mr-10">
                             <span className="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-main rounded-lg"></span>
-                            <div className="relative h-full p-5 bg-white border-2 border-main rounded-lg">
+                            <div className="relative h-full p-5 bg-mainBG border-2 border-main rounded-lg">
                                 <div className="flex items-center -mt-1">
                                     <h3 className="my-2 ml-3 text-lg font-bold text-main">Save Your Favorites</h3>
                                 </div>

@@ -17,10 +17,10 @@ export default function FavNft({ FavNftData }) {
     }
 
     return (
-        <NavLink to={`/nft/:${id}`} className="favNft w-full hover:bg-darkMainBg border-t-2 border-t-main">
+        <NavLink to={`/nft/:${id}`} className="favNft w-full hover:bg-darkMainBg border-t-2 border-t-main p-2 ">
             <div className="row flex justify-between items-center w-full ">
-                <img className="w-1/6 h-[150px] object-cover object-center" src={image || defaultImage} alt="favNftImage" />
-                <div className="w-full text-center p-5 text-lg text-main ">{name}</div>
+                <img className="w-[100px] h-[100px]  object-cover object-center" src={image || defaultImage} alt="favNftImage" />
+                <div className="w-full text-center p-5 text-2xl text-main ">{name}</div>
                 <button className="w-1/6 text-center p-5 text-lg text-main" onClick={handleFav}>
                     <i className={`fa-${isFav ? 'solid' : 'regular'} fa-heart`}></i>
                 </button>

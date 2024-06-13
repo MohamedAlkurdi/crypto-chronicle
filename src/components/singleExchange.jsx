@@ -27,7 +27,7 @@ export default function SingleExchange({ exchangeData }) {
     }
 
     return (
-        <NavLink to={`/singleExchange/:${id}`} className="coinInfo  hover:bg-darkMainBg border-t-2 border-t-main">
+        <NavLink to={`/singleExchange/:${id}`} className="exchangeInfo  hover:bg-darkMainBg border-t-2 border-t-main">
             <div className="row flex justify-between items-center w-full ">
                 <img className="w-1/3 text-center p-5 text-lg text-main " src={image || defaultImage} alt="exchangeImage" />
                 <div className="w-full text-center p-5 text-lg text-main ">{name || "Unknown"}</div>

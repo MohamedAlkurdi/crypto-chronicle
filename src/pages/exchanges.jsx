@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handle_global_429_error } from "../redux/generalData";
 import { handleCallsLimitError } from "../modules/errorHandlers";
 import SingleExchange from "../components/singleExchange";
+import Heading from "../components/heading";
 
 export default function Exchanges() {
     const { isSuccess, isError, isLoading, data, error } = useGetExchangesQuery();
@@ -56,7 +57,7 @@ export default function Exchanges() {
 
     return (
         <>
-            <h1>exchanges list:</h1>
+            <Heading title={"exchanges page"} />
             <div className="exchangesTableLabels hover:bg-darkMainBg border-t-2 border-t-main">
                 <div className="row flex justify-between items-center w-full ">
                     <div className="w-1/3 text-center p-5 text-lg text-main " >image</div>

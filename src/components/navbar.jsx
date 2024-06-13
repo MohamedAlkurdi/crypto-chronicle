@@ -9,7 +9,7 @@ export default function Navbar() {
             <NavLink className='capitalize cursor-pointer p-2 duration-200 hover:bg-lightMain rounded-lg text-secondary text-xl' to='/exchanges'>exchanges</NavLink>
             <div className="authBtns flex gap-4">
                 <NavLink className='capitalize cursor-pointer p-2 duration-200 hover:bg-lightSecondary bg-secondary rounded-lg text-main text-xl' to='/login'>login</NavLink>
-                <NavLink className='capitalize cursor-pointer p-2 duration-200 hover:bg-lightSecondary bg-secondary rounded-lg text-main text-xl' to='/signin'>register</NavLink>
+                <NavLink className='capitalize cursor-pointer p-2 duration-200 hover:bg-lightSecondary bg-secondary rounded-lg text-main text-xl' to='/signup'>register</NavLink>
             </div>
         </div>
     )

@@ -7,7 +7,7 @@ export default function StaticNftSet(){
         return <SingleNftDataDisplayer componentState={el} key={el.id}/>
     })
     return(
-        <div className="grid grid-cols-3 gap-x-6 gap-y-10 w-full">
+        <div className="grid grid-cols-3 gap-x-6 gap-y-10 w-full bg-mainBG">
         {renderNFTS}
         </div>
     )
