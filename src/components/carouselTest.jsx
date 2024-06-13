@@ -155,8 +155,7 @@ export default function ImageSlider({ images }) {
                 style={{ left: 0 }}
                 aria-label="View Previous Image"
             >
-                {/* <ArrowBigLeft aria-hidden /> */}
-                <div><i className="fa-solid fa-arrow-left"></i></div>
+                <div className="text-secondary"><i className="fa-solid fa-arrow-left"></i></div>
             </button>
             <button
                 onClick={showNextImage}
@@ -164,19 +163,10 @@ export default function ImageSlider({ images }) {
                 style={{ right: 0 }}
                 aria-label="View Next Image"
             >
-                <div><i className="fa-solid fa-arrow-right"></i></div>
-                {/* <ArrowBigRight aria-hidden /> */}
+                <div className="text-secondary"><i className="fa-solid fa-arrow-right"></i></div>
             </button>
-            <div
-                style={{
-                    overflow:"hidden",
-                    position: "absolute",
-                    bottom: ".5rem",
-                    left: "50%",
-                    translate: "-50%",
-                    display: "flex",
-                    gap: ".25rem",
-                }}
+            <div className="over flex gap-1 w-36 overflow-hidden absolute bottom-2 left-1/2 translate-x-[-50%] justify-between"
+
             >
                 {images.map((_, index) => (
                     <button
@@ -186,9 +176,9 @@ export default function ImageSlider({ images }) {
                         onClick={() => setImageIndex(index)}
                     >
                         {index === imageIndex ? (
-                            <div className="overflow-hidden">O</div>
+                            <div className="overflow-hidden text-secondary w-5"><i className="fa-solid fa-circle"></i></div>
                         ) : (
-                            <div className="overflow-hidden">X</div>
+                            <div className="overflow-hidden text-secondary w-5"><i className="fa-regular fa-circle"></i></div>
                         )}
                     </button>
                 ))}

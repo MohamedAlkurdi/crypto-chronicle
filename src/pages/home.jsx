@@ -6,6 +6,10 @@ import img4 from "../assets/pexels-davidmcbee-730564.jpg"
 import img5 from "../assets/pierre-borthiry-peiobty-vBCVcWUyvyM-unsplash.jpg"
 import img6 from "../assets/bannerImage.png"
 import Nfts from '../components/nfts'
+import Heading from '../components/heading'
+import FAQ from '../components/faq'
+import Contact from '../components/contact'
+import Introduction from '../components/introduction'
 
 const slides = [
     { url: img6, title: "italy" },
@@ -19,8 +23,18 @@ export default function Home() {
     return (
         < >
             <ImageSlider images={slides} />
+            <Heading title={"introduction"}/>
+            <Introduction/>
+            <Heading title={"few coins"}/>
             <Coins />
-            <Nfts/>
+            <Heading title={"few nfts"}/>
+            <Nfts />
+            <Heading title={"FAQ"}/>
+            <FAQ/>
+            <Heading title={"contact us"}/>
+            <Contact/>
         </>
     )
 }
+
+

@@ -12,7 +12,7 @@ export default function Footer() {
     })
 
     return (
-        <div className="footer w-full bg-main p-10 flex flex-col mt-10">
+        <div className="footer w-full bg-main p-10 flex flex-col mt-24">
             <div className="servicesAndMedia flex mb-12">
                 <div className="services flex flex-col justify-between w-2/3">
                     <h1 className="text-xl capitalize text-mainBG">services:</h1>
@@ -33,7 +33,7 @@ export default function Footer() {
             </div>
             <div className="credit flex items-center justify-around mb-10">
                 <p className="caption text-2xl w-1/2 text-mainBG">This applications backend services where provided by <a href="https://docs.coingecko.com/v3.0.1/reference/crypto-global">CoinGecko API</a>.</p>
-                <div className="logos flex items-center justify-right gap-10 w-1/2">
+                <div className="logos flex items-center justify-end gap-10 w-1/2">
                     <NavLink to='/' target="blank" className='capitalize text-secondary text-2xl'>crypto chronicle</NavLink>
                     <a target="blank" href="https://docs.coingecko.com/v3.0.1/reference/crypto-global"><img className="rounded-[50%] w-20" src={coinGeckoLogo} alt="coinGeckoLogo" /></a>
                 </div>

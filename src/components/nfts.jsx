@@ -55,7 +55,7 @@ export default function Nfts() {
     }, [is_429_error])
 
     return (
-        <div className="nftsInfoContainer flex flex-col  my-40">
+        <div className="nftsInfoContainer flex flex-col">
             <div className="nftInfo flex flex-col justify-between items-center ">
                 <StaticNftSet/>
                 <NavLink to={'/nfts'} className="w-full p-3 h-14 bg-main text-secondary hover:bg-lightMain text-center capitalize text-xl">learn more</NavLink>

@@ -9,7 +9,8 @@
     box-sizing: border-box;
     font-family: IBM;
     font-weight: 300;
-    overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* overflow-x: hidden; */
 }
 
 a {
